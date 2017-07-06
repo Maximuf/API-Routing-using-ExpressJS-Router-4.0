@@ -22,13 +22,14 @@ router.use((req, res, next) => {
 });
 
 router.param('name', (req, res, next, name) => {
-    if(name && typeof(name) === 'string') {
+    console.log(typeof(name), 'hello');
+    if(name && name.length > 6) {
         // once validation is done save the new item in the req
         req.name = name;
         // go to the next thing
         next();
     } else {
-        return res.send('name can only be strings');
+        return res.send('name with less than 6 character does not exist');
     }
 });
 
@@ -72,4 +73,4 @@ app.use('/', router);
 app.listen(port, ((err) => {
     if(err) return err;
     console.log(`Server started on port ${port}`);
-);
+}));
